@@ -1,0 +1,43 @@
+<div class="md_simple_modal_wrap" my-modal-position>
+<form>
+  <div class="md_simple_modal_body">
+      <h4>Destination wallet</h4>
+
+      <div  class="md-input-group" my-labeled-input>
+        <label class="md-input-label" my-i18n=""></label>
+        <input class="md-input" my-focused type="text" ng-model="attrTransactions.address" />
+      </div>
+
+	<form class="modal_simple_form">
+
+      <h4>SUMM</h4>
+
+      <div  class="md-input-group" my-labeled-input>
+        <label class="md-input-label" my-i18n=""></label>
+        <input class="md-input" my-focused type="text" ng-model="attrTransactions.amount" />
+      </div>
+
+
+      <h4>Passphrase</h4>
+
+      <div  class="md-input-group" my-labeled-input>
+        <label class="md-input-label" my-i18n=""></label>
+        <input class="md-input" my-focused type="text" ng-model="attrTransactions.walletPassphrase" />
+      </div>
+
+
+      <h4>SMS confirmation</h4>
+
+      <div  class="md-input-group" my-labeled-input>
+        <label class="md-input-label" my-i18n=""></label>
+        <input class="md-input" my-focused type="text" ng-model="smsCode.otp" />
+		<a ng-click="sendOTP()">Resend SMS</a>
+      </div>
+  </div>
+
+  <div class="md_simple_modal_footer">
+    <button class="btn btn-md" ng-click="$dismiss();" my-i18n="modal_cancel"></button>
+    <a class="btn btn-md" ng-click="sendBitcoins();$dismiss();getListWallets()">Send</a>
+  </div>
+ </form>
+</div>

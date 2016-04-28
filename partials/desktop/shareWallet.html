@@ -1,0 +1,44 @@
+<div class="md_simple_modal_wrap" my-modal-position>
+  <div class="md_simple_modal_body" ng-if='listShareWallets.incoming.length != 0'>
+    <form class="modal_simple_form">
+
+      <h4>ID shared wallet</h4>
+
+	  <select ng-model='shareAttr.walletShareId'>
+		<option class="wallet-wrapper" ng-repeat="shareWallet in listShareWallets.incoming track by $index" value='{{shareWallet.id}}'>
+			You have been invited to the wallet {{shareWallet.walletLabel}} by {{shareWallet.firstName + ' ' + shareWallet.lastName}}, {{shareWallet.email}}.
+		</option>
+	  </select>
+    </form>
+	<form class="modal_simple_form">
+
+      <h4>New wallet password</h4>
+
+      <div  class="md-input-group" my-labeled-input>
+        <label class="md-input-label" my-i18n=""></label>
+        <input class="md-input" my-focused type="text" ng-model="shareAttr.newWalletPassphrase" />
+      </div>
+
+    </form>
+	<form class="modal_simple_form">
+
+      <h4>User password</h4>
+
+      <div  class="md-input-group" my-labeled-input>
+        <label class="md-input-label" my-i18n=""></label>
+        <input class="md-input" my-focused type="text" ng-model="shareAttr.userPassword" />
+      </div>
+
+    </form>
+  <div class="md_simple_modal_footer">
+    <button class="btn btn-md" ng-click="$dismiss();" my-i18n="modal_cancel"></button>
+    <a class="btn btn-md" ng-click="acceptShareWallet();$dismiss()">Accept</a>
+	<a class="btn btn-md" ng-click="refuseShareWallet();$dismiss()">Reject</a>
+  </div>
+
+  </div>
+  <div ng-if='listShareWallets.incoming.length === 0'>
+	<h2>No new share wallet.</h2>
+	<button class="btn btn-md" ng-click="$dismiss();" my-i18n="modal_cancel"></button>
+  </div>
+</div>

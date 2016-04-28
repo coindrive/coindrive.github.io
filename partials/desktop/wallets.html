@@ -1,0 +1,283 @@
+ <div class="wrapper">
+		<link rel="stylesheet" href="style.css"/>
+		<header class='main-head'>
+				<div class="row">
+				<div class="col-md-4">
+				  <div class="tg_head_logo_dropdown dropdown" dropdown style='font-size: 18px;'>
+					<a class="tg_head_btn dropdown-toggle" dropdown-toggle>
+					  <div class="icon-hamburger-wrap">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					  </div>
+					</a>
+					<!--
+					  <div class="im_dialogs_panel">
+						<div class="im_dialogs_search">
+						  <input class="form-control im_dialogs_search_field no_outline" type="search" placeholder="{{'modal_search' | i18n}}" ng-model="search.query" autocomplete="off" />
+						  <a class="im_dialogs_search_clear tg_search_clear" ng-click="searchClear()" ng-show="search.query.length">
+							<i class="icon icon-search-clear"></i>
+						  </a>
+						</div>
+					  </div>
+					-->
+					<div class="wallet">
+						<a>BitDrive</a>
+					</div>
+					<div class="wallet-add">
+						<a ng-click="openCreateWallet()">+</a>
+					</div>
+					<ul class="dropdown-menu" ng-controller='AppIMController'>
+					  <li><a ng-click="openGroup()">
+						<i class="icon icon-new-group"></i><span my-i18n="im_new_group"></span>
+					  </a></li>
+					  <li ng-if="!isEmpty.contacts"><a ng-click="openContacts()">
+						<i class="icon icon-contacts"></i><span my-i18n="im_contacts"></span>
+					  </a></li>
+					  <li><a ng-click="openSettings()">
+						<i class="icon icon-settings"></i><span my-i18n="im_settings"></span>
+					  </a></li>
+					  <li><a href="#/im">
+						<i class="icon icon-about"></i><span>Chat</span>
+					  </a></li>
+					  <li class="acceptWallet">
+						<a ng-click='acceptWallet()'>Shared wallets request<div id="share-wallet-number"ng-class="{red: listShareWallets.incoming.length > 0}">{{listShareWallets.incoming.length}}</div></a>
+					  </li>
+					</ul>
+				  </div>
+
+						
+						
+					</div>
+					<div class="col-md-6">
+						<div class="wallets">
+							<h3>{{focusedWallet.wallet.label}}</h3>
+							<p id='address'>{{focusedWallet.wallet.id}}</p>
+						</div>
+						<div class='money'>
+							<p id='coin'>{{+focusedWallet.wallet.balance / 1e8 | number:4}}</p>
+							<p id='dollars'>$ {{(424*(+focusedWallet.wallet.balance / 1e8) | number:2)}}</p>
+						</div>
+						
+						<div class='wallet-default'>
+							<a ng-if="meOnBL.defaultWalletID != focusedWallet.wallet.id"ng-click="selectDefaultWallet()" class='Make-this-wallet-default'>Make this wallet default</a>
+							<div ng-if="meOnBL.defaultWalletID == focusedWallet.wallet.id">This wallet is default</div>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="shat">
+							<a href="#/im">Chat</a>
+						</div>
+					</div>
+					
+				</div>
+		</header>
+		<section class='main-section'>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="wallet-wrapp">
+							<a class="wallet-wrapper" ng-repeat="item in listWallets track by $index">
+								<div class="all-wallets" ng-init="arrayWalletsBalance[$index] = {};arrayWalletsBalance[$index].id = item.wallet.id" ng-click='focusWallet(item)'>
+									<h3>{{item.wallet.label}}</h3>
+									<h6>{{item.wallet.id}}</h6>
+								</div>
+								<div class='money' ng-click='focusWallet(item)'>
+									<p id='coin'>{{+item.wallet.balance / 1e8 | number:4}}</p>
+									<p id='dollars'>$ {{424*(+item.wallet.balance /1e8) | number:2}}</p>
+								</div>
+							</a>
+						</div>
+					</div>
+
+					<div class="col-md-8">
+						<div class='wallets-tabs'>
+							<ul>
+								<li>
+									<a ng-click='walletTab = 1'>Transactions</a>
+								</li>
+								<li>
+									<a ng-click='walletTab = 2'>Users</a>
+								</li>
+							<!--	<li>
+									<a ng-click='walletTab = 3'>Policy</a>
+								</li> -->
+								<li>
+									<a ng-click='walletTab = 4'>Settings</a>
+								</li>
+								</ul>
+						</div>
+						<div>
+							<div ng-if="walletTab == 1" class='table-wallet'>
+								<div ng-if = "focusedWallet.wallet.transactions != 0">
+									<table>
+										<tr>
+											<td style='padding-left: 60px'>
+												<h3>DATE</h3>
+											</td>
+											<td  style='padding-left: 60px'>
+												<h4>STATUS</h4>
+											</td>
+											<td  style='padding-left: 60px'>
+												<h4>AMOUNT</h4>
+											</td>
+											<td  style='padding-left: 60px'>
+												<h4>BALANCE</h4>
+											</td>						
+										</tr>
+										<tr ng-repeat = "transaction in focusedWallet.wallet.transactions track by $index">
+											<td style='padding-left: 90px'>
+											{{transaction.date | date:'medium'}}
+											</td>
+											<td style='padding-left:90px'>
+												<div ng-repeat = "direction in transaction.entries track by $index">
+														<div ng-if = "focusedWallet.wallet.id == direction.account">
+														<div ng-if='direction.value < 0'>
+															<p >Sent</p>
+														</div>
+														<div ng-if='direction.value >= 0'>
+															<p >Received</p>
+														</div>
+													</div>
+												</div>
+											</td>
+											<td style='padding-left:90px'>
+												<div ng-repeat = "directionMoney in transaction.entries track by $index">
+													<div ng-if = "focusedWallet.wallet.id == directionMoney.account">
+														{{directionMoney.value / 1e8 | number:4}}
+													</div>
+												</div>
+											</td>
+											<td style='padding-left: 90px'>
+												<div ng-repeat = "Money in transaction.entries track by $index">
+													<div ng-if = "focusedWallet.wallet.id == Money.account" ng-init='getSumValue(Money.value,$index)'>
+														{{Money.lastBalance / 1e8 | number:4}}
+													</div>
+												</div>
+											</td>									
+										</tr>
+									</table>
+									</div>
+									<div ng-if="focusedWallet.wallet.transactions == 0" class='no-transaction'>
+										<h2>This wallet has not been used yet.</h2>
+									</div>
+									<div class="transaction-buttons">
+										<a ng-click="newTransactions()" class='sent-button'>Send</a>
+										<a ng-click="tabAddresses = !tabAddresses" class='sent-button'>Receive</a>
+									</div>
+									<div ng-if="tabAddresses">
+										<div>
+										<h3>Addresses</h3>
+										</div>
+										<div ng-repeat="address in focusedWallet.wallet.listAddresses.addresses track by $index" >
+											<p class='list-addres'>{{address.address}}</p>
+										</div>			
+									</div>
+								</div>
+							<div ng-if="walletTab == 2">
+								<div class='user-content'>
+									<h3>Grant user access to your wallet to enforce policy or enable multiple spenders.</h3>
+									<button ng-click="openAddUser();getListWallets()" ng-if='focusedWallet.wallet.users'>Add user</button>							
+								</div>
+								<div>
+									<table style="width: 100%" ng-if='focusedWallet.wallet.users'>
+										<tbody>
+												<td style="width: 100px">
+												<h4>Picture</h4>
+												</td>
+												<td>
+												<h4>USER</h4>
+												</td>
+												<td>
+												<h4>ROLE</h4>
+												</td>
+												<td>
+												</td>
+											</tbody>
+											<tr ng-repeat="users in focusedWallet.wallet.users track by $index">
+												<td style='padding-left: 30px;'>
+													<div class="im_dialog_photo pull-left" my-peer-photolink="users.idUserChat" img-class="im_dialog_photo" watch="true"></div>
+												</td>
+												<td style='padding-left: 30px;'>{{users.firstName + " " + users.lastName}}.<br> Phonenumber is +{{users.phoneNumber}}. <br> Email: {{users.email}}</td>
+												<td ng-if="users.permissions === 'admin,spend,view'" style='padding-left: 30px;'>Admin</td>
+												<td ng-if="users.permissions === 'view,spend' || users.permissions === 'spend,view'">Spend</td>
+												<td ng-if="users.permissions === 'view'">View</td>
+												<!-- <td ng-if='users.user != bitcoinUserID'>
+													<a ng-click='removeUserFromWallet(users.user)'>Remove user</a>
+												</td> -->
+											<tr>
+											</tr>
+												<tr ng-repeat="inv in listShareWallets.outgoing |sameWallet:focusedWallet.wallet.id track by $index" style='padding-left: 30px;'>
+												<td style='padding-left: 30px;'>
+													<div class="im_dialog_photo pull-left" my-peer-photolink="inv.idUserChat" img-class="im_dialog_photo" watch="true"></div>
+												</td>
+												<td style='padding-left: 30px;'>{{inv.firstName + " " + inv.lastName}}.<br> Phonenumber is +{{inv.phoneNumber}}. <br> Email: {{inv.email}}</td>
+												<td ng-if="inv.permissions === 'admin,spend,view'">Admin</td>
+												<td ng-if="inv.permissions === 'view,spend' || inv.permissions === 'spend,view'">Spend</td>
+												<td ng-if="inv.permissions === 'view'">View</td>
+												<td ng-if='users.user != bitcoinUserID'>
+													<a ng-click='refuseShareWallet(inv.id)'>Cancel share</a>
+												</td>
+											</tr>
+									</table>
+									<div ng-if='!focusedWallet.wallet.users'>
+										<h4>You don't have permission to view users of this wallet.</h4>
+									</div>
+								</div>
+							</div>
+							<div ng-if="walletTab == 3">
+							</div>
+							<div ng-if="walletTab == 4">
+							<div ng-switch="settingsTab" class='seting-list'>
+							 	<ul ng-init = 'settingsTab = 1'>
+							 		<li><a ng-click="settingsTab = 1">General</a></li>
+							 		<!--<li><a ng-click="settingsTab = 2">Password</a></li> -->
+							 		<li><a ng-click="settingsTab = 3">Freeze wallet</a></li>
+							 	</ul>
+								<div ng-switch-when="1">
+								<div class='seting-content'>
+									<select class="modal_simple_form" ng-model='newAddressLabel.address'>
+										<option ng-repeat="addressForLabel in focusedWallet.wallet.listAddresses.addresses track by $index" 
+												value = "{{addressForLabel.address}}"
+										>
+										{{addressForLabel.label}} Address: {{addressForLabel.address}}
+										</option>											
+									</select>
+									<form>
+										<input type="text" ng-model="newAddressLabel.label">
+										<a ng-click="changeWalletName()" class='sent-button'>Change Address name</a>
+										<a ng-click="removeAddressLabel()" class='sent-button'>Remove Address name</a>
+									</form>
+								</div>
+								</div >
+								<div ng-switch-when="2">Password</div>
+								<div ng-switch-when="3" class='seting-content'>
+									<h4>Freeze wallet</h4>
+									<p>In case of emergency, you can freeze the Bit Drive key on your wallet.
+									This will prevent Bit Drive from signing any transactions for a specified
+									amount of time.</p>
+									<p>Once set, the wallet cannot be unfrozen before the end of the time period.</p>
+									<form class='seting-forms'>
+										<input type="text" value="" placeholder="Enter your SMS code" ng-model="smsCode.otp"></input>
+										<a ng-click="sendOTP()" class='sent-sms'>Send SMS</a>
+									</form>
+									<form class="modal_simple_form seting-forms">
+										<select class="modal_simple_form" ng-model='duration.duration'>
+											<option value = "86400">Day</option>
+											<option value = "604800">Week</option>
+											<option value = "1209600">Two weeks</option>
+											<option value = "4838400">Month</option>														
+										</select>
+										<a ng-click="freezeWallet()" class='sent-sms'>Freeze wallet</a>
+									</form>
+								
+									
+								</div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</section>
+	</div>

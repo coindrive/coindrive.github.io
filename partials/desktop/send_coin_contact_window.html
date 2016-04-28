@@ -1,0 +1,66 @@
+<div class="md_simple_modal_wrap" my-modal-position>
+
+  <div class="md_simple_modal_body">
+	<form>
+   		<div>
+		<h4>Choose your wallet</h4>
+		</div>
+		<select ng-model='idWalletChatRoom'>
+			<option class="wallet-wrapper" ng-repeat="item in listWallets track by $index" value='{{item.wallet.id}}'>
+				Wallet name:{{item.wallet.label}}, Bitcoins amount:{{+item.wallet.balance / 1e8 | number:4}}
+			</option>
+		</select>
+
+      <h4>Destination wallet</h4>
+	  <div>
+		<h5 ng-if='useDefaultWallet'>Default receivers wallet</h5>
+	  </div>
+      <div  class="md-input-group" my-labeled-input ng-if='!useDefaultWallet'>
+        <label class="md-input-label" my-i18n=""></label>
+        <input class="md-input" my-focused type="text" ng-model="attrTransactions.address"/>
+      </div>
+	  <div>
+		<label>Use default receivers wallet?</label>
+		<input type="checkbox" ng-model="useDefaultWallet"
+		[name="useDefaultWallet"]
+        [ng-true-value="true"]
+        [ng-false-value="false"]
+        [ng-change="useDefaultWallet"]>
+	  </div>
+
+
+      <h4>SUMM</h4>
+
+      <div  class="md-input-group" my-labeled-input>
+        <label class="md-input-label" my-i18n=""></label>
+        <input class="md-input" my-focused type="text" ng-model="attrTransactions.amount" />
+      </div>
+
+
+      <h4>Passphrase</h4>
+
+      <div  class="md-input-group" my-labeled-input>
+        <label class="md-input-label" my-i18n=""></label>
+        <input class="md-input" my-focused type="text" ng-model="attrTransactions.walletPassphrase" />
+      </div>
+
+
+
+
+      <h4>SMS confirmation</h4>
+
+      <div  class="md-input-group" my-labeled-input>
+        <label class="md-input-label" my-i18n=""></label>
+        <input class="md-input" my-focused type="text" ng-model="smsCode.otp" />
+		<a ng-click="sendOTP()">Resend SMS</a>
+      </div>
+
+   
+	  </div>
+
+	  <div class="md_simple_modal_footer">
+		<button class="btn btn-md" ng-click="$dismiss();" my-i18n="modal_cancel"></button>
+		<a class="btn btn-md" ng-click="sendBitcoinsContactWindow();$dismiss()">Send</a>
+	  </div>
+	</form>
+</div>

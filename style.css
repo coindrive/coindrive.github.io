@@ -1,0 +1,228 @@
+.dropdown-menu .red #share-wallet-number{
+	color:#ff0000;
+}
+.wrapper {
+	max-width: 988px;
+	margin: 0 auto;
+}
+
+.main-head {
+	background-color: #4caf50;
+	height: 50px;
+}
+.sandvith  {
+	margin: 10px 15px;
+	display: inline-block;
+	float: left;
+}
+.sandvith a i {
+	font-size: 35px;
+	color: #fff;
+}
+.wallet {
+	margin-top: 15px;
+	display: inline-block;
+
+}
+.wallet a{
+	margin-top: 15px;
+	margin-bottom: 15px;
+	font-size: 18px;
+	color: #fff;
+}
+.wallet a:hover{
+	text-decoration: none;
+}
+.wallet-add {
+	display: inline-block;
+	margin-left: 50px;
+}
+.wallet-add a  {
+	color: #fff;
+	font-size: 20px;
+}
+.wallet-add a:hover{
+	text-decoration: none;
+}
+.wallets {
+	display: inline-block;
+	margin-top: 8px;
+	margin-bottom: 5px;
+
+}
+.wallets p{
+	color: #fff;
+}
+.wallets h3 {
+	font-size: 15px;
+	color:#fff;
+	margin: 0;
+}
+.money {
+	float: right;
+	margin-right: 20px;
+}
+#coin {
+	margin-top: 10px;
+	margin-bottom: 1px;
+	color: #242424;
+	font-size: 18px;
+}
+#dollars {
+	margin-top: 0;
+	color: #242424;
+	margin-bottom: 1px;
+}
+.shat {
+	margin: 15px 70px;
+}
+.shat a {
+	color: #fff;
+	font-size: 18px;
+}
+.shat a:hover{
+	text-decoration: none;
+}
+.all-wallets {
+	display: inline-block;
+	margin-bottom: 15px;
+}
+.all-wallets:focus {
+	background-color: #000;
+}
+.all-wallets h3{
+	font-size: 13px;
+	color: #242424;
+}
+.all-wallets h6 {
+	font-size: 10px;
+}
+
+.tg_head_logo_dropdown .dropdown{
+	display: inline-block !important;
+	margin: 0;
+}
+.wallet-wrapp {
+	margin-left: 10px;
+	border-right: 1px solid #4caf50;
+}
+.wallets-tabs {
+	margin-top: 30px;
+}
+.wallets-tabs ul li {
+	display: inline-block;
+	padding-left: 35px;
+	list-style-type: none;
+}
+.wallets-tabs a {
+	font-size: 14px;
+	color: #242424;
+}
+.wallets-tabs a:hover{
+	border-bottom:  1px solid #4caf50;
+	text-decoration: none;
+}
+.table-wallet h3{
+	padding-left: 30px;
+	font-size: 14px;
+}
+.table-wallet h4{
+	font-size: 14px;
+	display: inline-block;
+}
+.sent-button {
+	color: #fff;
+	background-color: #4caf50;
+	display: inline-block;
+	padding: 5px 30px;
+	border-radius: 25px;
+	margin: 20px 10px;
+}
+.user-content h3 {
+	font-size: 15px;
+	color: #242424;
+	margin-top: 30px;
+	margin-left: 90px;
+	display: inline-block;
+}
+.sent-button:hover{
+	color: #fff;
+	text-decoration: none;
+}
+.user-content button {
+	margin-top: 30px;
+	margin-left: 20px;
+}
+.user-table h4 {
+	font-size: 18px;
+	padding-left: 30px;
+}
+.no-transaction h2 {
+	color: #242424;
+	font-size: 18px;
+	padding-left: 30px;
+}
+ .main-section {
+ 	border: 1px solid #4caf50;
+ }
+.seting-list ul {
+	margin-top: 40px;
+}
+.seting-list ul li {
+	list-style-type: none;
+	padding-bottom: 10px;
+	display: inline-block;
+	padding-left: 100px;
+}
+.seting-list ul li a {
+	color: #242424;
+	display: block;
+}
+.seting-content {
+	margin-left: 40px;
+}
+.sent-sms {
+	color: #fff;
+	background-color: #4caf50;
+	display: inline-block;
+	padding: 5px 30px;
+	border-radius: 25px;
+	margin: 20px 10px;
+}
+.sent-sms:hover {
+	color: #fff;
+}
+.seting-forms {
+	display: inline-block;
+}
+.list-addres {
+	padding-left: 30px;
+}
+.transaction-buttons {
+	display: inline-block;
+	margin-left: 220px;
+}
+.Make-this-wallet-default {
+	display: inline-block;
+	padding: 4px 6px;
+	color: #fff;
+	border-radius: 5px;
+	background-color: #4caf50;
+	
+
+}
+.Make-this-wallet-default:hover{
+	background-color: #fff;
+	color: #4caf50;
+	text-decoration: none;
+}
+.wallet-default {
+	margin-left: 40px;
+	margin-top: 8px;
+}
+.send-bitcoin {
+	display: inline-block !important;
+	background-color: #4caf50;
+	color: #fff;
+	margin-left: 20px;
+}

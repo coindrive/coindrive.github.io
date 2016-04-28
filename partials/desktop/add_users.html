@@ -1,0 +1,29 @@
+<div class="md_simple_modal_wrap" my-modal-position>
+
+  <div class="md_simple_modal_body">
+
+    <form class="modal_simple_form">
+
+      <h4>User email</h4>
+
+      <div  class="md-input-group" my-labeled-input>
+        <label class="md-input-label" my-i18n=""></label>
+        <input class="md-input" my-focused type="text" ng-model="newUserObj.email" />
+      </div>
+
+    </form>
+	<form class="modal_simple_form">
+		<select class="modal_simple_form" ng-model='newUserObj.permissions'>
+			<option value = "view,spend,admin">Admin</option>
+			<option value = "view,spend">Spend</option>
+			<option value = "view">View</option>		
+		</select>
+	</form>
+  </div>
+
+  <div class="md_simple_modal_footer">
+    <button class="btn btn-md" ng-click="$dismiss();" my-i18n="modal_cancel"></button>
+    <a class="btn btn-md" ng-click="addUserInWallet();$dismiss();getListWallets()">Create</a>
+  </div>
+
+</div>
