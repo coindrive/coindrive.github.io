@@ -1,5 +1,79 @@
 <div class="login_page_wrap" ng-model="$scope.signUpOrSignIn" ng-init="$scope.signUpOrSignIn=0">
-  <link rel="stylesheet" href="_main.css">
+  <style>
+  #main {
+	max-width: 480px;
+	margin: 5% auto 0;
+}
+.main-head {
+	background-color: #7AB317;
+}
+.main-head a img{
+	margin: 15px 40px;
+	color: #fff;
+}
+.main-section {
+	height: 680px;
+	position: relative;
+	max-width: 480px;
+
+}
+.content-section{
+	position: absolute;
+	bottom: 170px;
+	left: 30px;
+}
+.login-up {
+	font-size: 22px;
+	color: #fff;
+	background-color: #388E3C;
+	opacity: 1;
+	filter: alpha(Opacity=70);
+	padding: 10px 130px;
+	width: 100px;
+	margin: 0 50px;
+	border-radius: 25px;
+	text-decoration: none;
+	transition: 0.5s ease-in-out;
+}
+.login-up:hover{
+	transition: 0.5s ease-in-out;
+	color: #fff;
+	opacity: 0.9;
+	filter: alpha(Opacity=50);
+	border-radius: 25px;
+	text-decoration: none;
+}
+.chec-in {
+	font-size: 18px;
+	color: #4CAF50;
+	opacity: 1;
+	filter: alpha(Opacity=70);
+	border-radius: 6px;
+	text-decoration: none;
+	margin: 20px 0 0 300px;
+	position: fixed;
+}
+.chec-in:hover{
+	transition: 1s ease-in-out;
+	color: #388E3C;
+	filter: alpha(Opacity=50);
+	border-radius: 6px;
+	text-decoration: underline;
+}
+.main-section {
+	background-image: url('img/1.jpeg');
+}
+.main-logo{
+	max-width:480px;
+	margin-bottom: 170px;
+	margin-left: 25px;
+}
+.main-logo img {
+	display:block;
+	max-width: 340px;
+
+}	
+  </style>
    	 <div class="" ng-if="$scope.signUpOrSignIn === 1">
 		<div class="login_head_bg"></div>
 		<div class="login_page">
