@@ -44,7 +44,7 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 		Backendless.UserService.register( user );		
 	}
 	function loginGoooood (){
-		console.log('I am in')
+		
 	}
 	$scope.loginBackend = function(){
 	$rootScope.Backendless.UserService.login($scope.credentials.email, $scope.credentials.password, true, new $rootScope.Backendless.Async(loginGoooood,regBackend));
@@ -215,8 +215,7 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 	try{
 	$rootScope.bitgo.authenticate($rootScope.user)
 	} catch(err) {
-		console.error(err)
-	} 
+			} 
       $timeout.cancel(callTimeout);
 
       ErrorService.confirm({
@@ -4964,8 +4963,7 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 						}
 						
 					}
-				}
-			console.log($rootScope.listWallets)	
+				
 		})
 	}	
 	
@@ -4984,7 +4982,6 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 	$scope.useDefaultWallet = false;
 	$scope.focusWallet = function (obj){
 		$rootScope.focusedWallet = obj;
-		console.log($rootScope.focusedWallet);
 		$scope.sum = [];
 		$scope.resultSum = [];
 	}
@@ -5282,7 +5279,6 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 			return
 		}
 		var policyTable = $rootScope.Backendless.Persistence.of("PolicyForWallet").find();
-		console.log(policyTable)
 		var curWallet;
 		for (var i = 0; i < policyTable.data.length;i++){
 			if (policyTable.data[i].WalletID == $rootScope.focusedWallet.wallet.id){
@@ -5315,7 +5311,6 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 			return
 		}
 		var policyTable = $rootScope.Backendless.Persistence.of("PolicyForWallet").find();
-		console.log(policyTable)
 		var curWallet;
 		for (var i = 0; i < policyTable.data.length;i++){
 			if (policyTable.data[i].WalletID == $rootScope.focusedWallet.wallet.id){
