@@ -4963,7 +4963,7 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 						}
 						
 					}
-				
+				}
 		})
 	}	
 	
