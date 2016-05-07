@@ -5307,6 +5307,7 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 			$rootScope.Backendless.Persistence.of("PolicyForWallet").save(obj)
 		}
 		$scope.walletPolicy.amountBitcoins = '';
+		toastr.success("Policy was set","Success");
 	}
 	$scope.submitTransactionPolicy = function(){
 		if($rootScope.bitcoinUserID != $rootScope.focusedWallet.wallet.users[0].user){
@@ -5333,6 +5334,7 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 			$rootScope.Backendless.Persistence.of("PolicyForWallet").save(obj)
 		}
 		$scope.walletPolicy.amountBitcoins = '';
+		toastr.success("Policy was set","Success");
 	}
 	function checkLimits (amount){
 		var policyTable = $rootScope.Backendless.Persistence.of("PolicyForWallet").find();
