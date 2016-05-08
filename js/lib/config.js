@@ -19,10 +19,10 @@ Config = window.Config || {};
 */
 
 Config.App = {
-  id: 2496,
-  hash: '8da85b0d5bfe62527e5b244c209159c3',
-  version: '0.5.2',
-  domains: ['web.telegram.org', 'zhukov.github.io']
+  id: 43831,
+  hash: '4ce6b48df514adecfe5de00233dad426',
+  version: '0.1.1',
+  domains: ['coindrive.github.io']
 };
 
 Config.Modes = {
