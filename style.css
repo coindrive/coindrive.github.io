@@ -351,3 +351,7 @@ text-decoration: none;
 .active-tab-settings:hover { 
 	text-decoration: none; 
 }
+.active-tab-wallet {
+	background-color:#4caf50;
+	color:#fff;
+}
