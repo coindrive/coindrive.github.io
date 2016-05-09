@@ -44,7 +44,7 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 		Backendless.UserService.register( user );		
 	}
 	function loginGoooood (){
-		console.log('I am in')
+		
 	}
 	$scope.loginBackend = function(){
 	$rootScope.Backendless.UserService.login($scope.credentials.email, $scope.credentials.password, true, new $rootScope.Backendless.Async(loginGoooood,regBackend));
@@ -215,8 +215,7 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 	try{
 	$rootScope.bitgo.authenticate($rootScope.user)
 	} catch(err) {
-		console.error(err)
-	} 
+			} 
       $timeout.cancel(callTimeout);
 
       ErrorService.confirm({
@@ -4965,7 +4964,6 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 						
 					}
 				}
-			console.log($rootScope.listWallets)	
 		})
 	}	
 	
@@ -4982,9 +4980,6 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 	}
 	$rootScope.focusedWallet;
 	$scope.useDefaultWallet = false;
-	// $scope.blaBlaBla = function(){
-		// console.log($rootScope.listShareWallets)
-	// }
 	$scope.focusWallet = function (obj){
 		$rootScope.focusedWallet = obj;
 		$scope.sum = [];
@@ -5096,11 +5091,6 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 				toUser:$rootScope.listShareWallets.outgoing[i].toUser
 			}
 		}
-		
-		console.log($scope.outgoingShare)
-		console.log('result!!!!!!!!!');
-		console.log(result);
-		console.log('result!!!!!!!!!');		
 		});
 	$rootScope.listShareWallets	
 	$scope.duration = {duration:4000}
@@ -5123,12 +5113,6 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 	});
 	})
 	}
-					// if(err){
-					// toastr.error('User wasn`t added')
-				// } else {
-					// toastr.success('User was added','Success')
-					// $rootScope.$broadcast('UpdateWallet');
-				// }
 	
 	$scope.sendOTP = function(){
 		$rootScope.bitgo.sendOTP({forceSMS: true}, function callback(err) {
@@ -5164,6 +5148,11 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 		
 	}
 	$scope.sendBitcoinsContactWindow = function(){
+		if(checkLimits($scope.attrTransactions.amount)){
+			toastr.error("Limit")
+			return
+		}
+		var amount = $scope.attrTransactions.amount;
 		$scope.attrTransactions.amount = $scope.attrTransactions.amount * 1e8;
 		if($scope.useDefaultWallet){
 			for(var i = 0;i < $rootScope.BLTable.data.length;i++){
@@ -5184,12 +5173,18 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 				if (err) { toastr.error("Error sending coins!"); return process.exit(-1); }
 					toastr.success('Success transaction!','Success')
 					$rootScope.$broadcast('UpdateWallet');
+					appdateAlreadyUsed(amount);
 				});
 			})
 		})
 		delete $rootScope.contactUserID;
 	}
 	$scope.sendBitcoinsChatWindow = function(){
+		if(checkLimits($scope.attrTransactions.amount)){
+			toastr.error("Limit")
+			return
+		}
+		var amount = $scope.attrTransactions.amount;
 		$scope.attrTransactions.amount = $scope.attrTransactions.amount * 1e8;
 		$rootScope.bitgo.wallets().get({id: $scope.idWalletChatRoom}, function(err, wallet) {
 			if (err) { console.log("Error getting wallet!"); console.dir(err); return process.exit(-1); }
@@ -5202,6 +5197,7 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 				if (err) { toastr.error("Error sending coins!"); return process.exit(-1); }
 					toastr.success('Success transaction!','Success')
 					$rootScope.$broadcast('UpdateWallet');
+					appdateAlreadyUsed(amount);
 				});
 			})
 		})
@@ -5209,6 +5205,11 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 	
 	
 	$scope.sendBitcoins = function(){
+		if(checkLimits($scope.attrTransactions.amount)){
+			toastr.error("Limit")
+			return
+		}
+		var amount = $scope.attrTransactions.amount;
 		$scope.attrTransactions.amount = $scope.attrTransactions.amount * 1e8;
 		$rootScope.bitgo.wallets().get({id: $rootScope.focusedWallet.wallet.id}, function(err, wallet) {
 			if (err) { console.log("Error getting wallet!"); console.dir(err); return process.exit(-1); }
@@ -5221,6 +5222,8 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 				if (err) { toastr.error("Error sending coins!"); return process.exit(-1); }
 					toastr.success('Success transaction!','Success')
 					$rootScope.$broadcast('UpdateWallet');
+					appdateAlreadyUsed(amount);
+					
 				});
 			})
 		})
@@ -5248,26 +5251,6 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 			});
 		};
 	
-	// $scope.loading=true;
-	// $timeout(function(){
-		// $scope.loading=false;
-	// },2000)
-	
-	// $scope.removeUserFromWallet = function (idUser){
-		// $rootScope.bitgo.wallets().get({ "id": $rootScope.newAddressLabel.address }, function callback(err, wallet) {
-		  // if (err) {
-			// throw err;
-		  // }
-
-		  // wallet.removeUser({ "user": idUser }, function callback(err, wallet) {
-			// if (err) {
-			  // return;
-			// }
-			// console.log("User was removed")
-		  // });
-		// });
-			
-	// }
 	$scope.removeAddressLabel = function (){
 			var wallets = $rootScope.bitgo.wallets();
 		wallets.get({"type": "bitcoin","id":$rootScope.focusedWallet.wallet.id}, function callback(err, wallet) {
@@ -5284,4 +5267,166 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 	});
 	});
 	}
+	$scope.showForm = function (){
+		console.log(walletPolicy)
+	};
+	$scope.walletPolicy = {
+		amountBitcoins:''
+	};
+	$scope.submitWalletPolicy = function(){
+		if($rootScope.bitcoinUserID != $rootScope.focusedWallet.wallet.users[0].user){
+			toastr.error("Your not owner of this wallet","Wallet policy wasn`t set")
+			return
+		}
+		var policyTable = $rootScope.Backendless.Persistence.of("PolicyForWallet").find();
+		var curWallet;
+		for (var i = 0; i < policyTable.data.length;i++){
+			if (policyTable.data[i].WalletID == $rootScope.focusedWallet.wallet.id){
+				curWallet = policyTable.data[i];
+				break;
+			}
+		}
+		if (curWallet){
+			curWallet.dayLimit = $scope.walletPolicy.amountBitcoins + "";
+			curWallet.today = new Date();
+			if(!curWallet.alredyUsed){
+				curWallet.alredyUsed = '0';
+			}
+			$rootScope.Backendless.Persistence.of("PolicyForWallet").save(curWallet)
+		} else {
+			var obj = {};
+			obj.walletOwnerID = $rootScope.focusedWallet.wallet.users[0].user;
+			obj.WalletID = $rootScope.focusedWallet.wallet.id;
+			obj.today = new Date();
+			obj.dayLimit = $scope.walletPolicy.amountBitcoins + "";
+			obj.alredyUsed = '0';
+			$rootScope.Backendless.Persistence.of("PolicyForWallet").save(obj)
+		}
+		$scope.walletPolicy.amountBitcoins = '';
+		toastr.success("Policy was set","Success");
+	}
+	$scope.submitTransactionPolicy = function(){
+		if($rootScope.bitcoinUserID != $rootScope.focusedWallet.wallet.users[0].user){
+			toastr.error("Your not owner of this wallet","Wallet policy wasn`t set")
+			return
+		}
+		var policyTable = $rootScope.Backendless.Persistence.of("PolicyForWallet").find();
+		var curWallet;
+		for (var i = 0; i < policyTable.data.length;i++){
+			if (policyTable.data[i].WalletID == $rootScope.focusedWallet.wallet.id){
+				curWallet = policyTable.data[i];
+				break;
+			}
+		}
+		if (curWallet){
+			curWallet.transactionLimit = $scope.walletPolicy.amountBitcoins + "";
+			$rootScope.Backendless.Persistence.of("PolicyForWallet").save(curWallet)
+		} else {
+			var obj = {};
+			obj.walletOwnerID = $rootScope.focusedWallet.wallet.users[0].user;
+			obj.WalletID = $rootScope.focusedWallet.wallet.id;
+			obj.transactionLimit = $scope.walletPolicy.amountBitcoins + "";
+			$rootScope.Backendless.Persistence.of("PolicyForWallet").save(obj)
+		}
+		$scope.walletPolicy.amountBitcoins = '';
+		toastr.success("Policy was set","Success");
+	}
+	function checkLimits (amount){
+		var policyTable = $rootScope.Backendless.Persistence.of("PolicyForWallet").find();
+		var curWallet;
+		var res;
+		for (var i = 0; i < policyTable.data.length;i++){
+			if (policyTable.data[i].WalletID == $rootScope.focusedWallet.wallet.id){
+				curWallet = policyTable.data[i];
+				break;
+			}
+		}
+		if(curWallet.today){
+			var walletDate = new Date();
+			walletDate.setTime(curWallet.today);
+			var date = new Date();
+			var resultDate = (date.getUTCDate() - walletDate.getUTCDate() > 0) || (date.getUTCMonth() - walletDate.getUTCMonth() > 0) || (date.getUTCFullYear() - walletDate.getUTCFullYear() > 0);
+			if (resultDate) {
+				curWallet.today = new Date();
+				curWallet.alredyUsed = "0"
+				$rootScope.Backendless.Persistence.of("PolicyForWallet").save(curWallet)
+			}
+		}
+		if(!curWallet){
+			res = true;
+		} else if (+curWallet.dayLimit && +curWallet.transactionLimit){
+			res = +curWallet.transactionLimit >= +amount && (curWallet.dayLimit - amount - curWallet.alredyUsed) > 0;
+		} else if (+curWallet.dayLimit && +!curWallet.transactionLimit){
+			res = +curWallet.dayLimit >= +amount && (+curWallet.dayLimit - +amount - +curWallet.alredyUsed) >= 0;
+		} else if (+curWallet.transactionLimit && +!curWallet.dayLimit) {
+			res = +curWallet.transactionLimit >= +amount 
+		} else {
+			res = false
+		}
+		res = !res
+		return res
+	}
+	function appdateAlreadyUsed(amount){
+		var policyTable = $rootScope.Backendless.Persistence.of("PolicyForWallet").find();
+		var curWallet;
+		for (var i = 0; i < policyTable.data.length;i++){
+			if (policyTable.data[i].WalletID == $rootScope.focusedWallet.wallet.id){
+				curWallet = policyTable.data[i];
+				break;
+			}
+		}
+		if(curWallet){
+			var value = +curWallet.alredyUsed;
+			value =+amount + value;
+			curWallet.alredyUsed = value + '';
+			$rootScope.Backendless.Persistence.of("PolicyForWallet").save(curWallet)
+		}
+	}
+	$scope.removePolicyPerTransaction = function (){
+		var policyTable = $rootScope.Backendless.Persistence.of("PolicyForWallet").find();
+		var curWallet;
+		for (var i = 0; i < policyTable.data.length;i++){
+			if (policyTable.data[i].WalletID == $rootScope.focusedWallet.wallet.id){
+				curWallet = policyTable.data[i];
+				break;
+			}
+		}
+		if(curWallet){
+			curWallet.transactionLimit ='21000000';
+			$rootScope.Backendless.Persistence.of("PolicyForWallet").save(curWallet)
+			toastr.success("Wallet policy was removed","Success")
+		}
+	}
+	$scope.removePolicyPerDay = function (){
+		var policyTable = $rootScope.Backendless.Persistence.of("PolicyForWallet").find();
+		var curWallet;
+		for (var i = 0; i < policyTable.data.length;i++){
+			if (policyTable.data[i].WalletID == $rootScope.focusedWallet.wallet.id){
+				curWallet = policyTable.data[i];
+				break;
+			}
+		}
+		if(curWallet){
+			curWallet.dayLimit ='21000000';
+			$rootScope.Backendless.Persistence.of("PolicyForWallet").save(curWallet);
+			toastr.success("Wallet policy was removed","Success");
+		}
+	}
+	$scope.removeAllPolicyPerWallet = function (){
+		var policyTable = $rootScope.Backendless.Persistence.of("PolicyForWallet").find();
+		var curWallet;
+		for (var i = 0; i < policyTable.data.length;i++){
+			if (policyTable.data[i].WalletID == $rootScope.focusedWallet.wallet.id){
+				curWallet = policyTable.data[i];
+				break;
+			}
+		}
+		if(curWallet){
+			curWallet.transactionLimit ='21000000';
+			curWallet.dayLimit ='21000000';
+			$rootScope.Backendless.Persistence.of("PolicyForWallet").save(curWallet);
+			toastr.success("Wallet policy was removed","Success")
+		}
+	}
+	
 })
