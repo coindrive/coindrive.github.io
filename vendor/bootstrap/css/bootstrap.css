@@ -281,13 +281,34 @@ body {
   color: #000000;
   background-color: #ffffff;
 }
+button{
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
 input,
-button,
-select,
 textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+  border-radius: 20px;
+  padding: 5px;
+}
+select {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  position: relative;
+  width: 150px;
+  padding: 10px;
+  margin: 0 auto;
+  background: #4CAF50;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 20px;
+  border-color: #4caf50;
 }
 a {
   color: #3a6d99;

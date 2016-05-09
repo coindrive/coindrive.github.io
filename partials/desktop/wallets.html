@@ -58,11 +58,6 @@
 							<p id='coin'>{{+focusedWallet.wallet.balance / 1e8 | number:4}}</p>
 							<p id='dollars'>$ {{(424*(+focusedWallet.wallet.balance / 1e8) | number:2)}}</p>
 						</div>
-						
-						<div class='wallet-default'>
-							<a ng-if="meOnBL.defaultWalletID != focusedWallet.wallet.id"ng-click="selectDefaultWallet()" class='Make-this-wallet-default'>Make this wallet default</a>
-							<div ng-if="meOnBL.defaultWalletID == focusedWallet.wallet.id">This wallet is default</div>
-						</div>
 					</div>
 					<div class="col-md-2">
 						<div class="shat">
@@ -78,18 +73,22 @@
 						<div class="wallet-wrapp">
 							<a class="wallet-wrapper" ng-repeat="item in listWallets track by $index">
 								<div class="all-wallets" ng-init="arrayWalletsBalance[$index] = {};arrayWalletsBalance[$index].id = item.wallet.id" ng-click='focusWallet(item)'>
+									<div class='money-left' ng-click='focusWallet(item)'>
+										<p id='coin'>{{+item.wallet.balance / 1e8 | number:4}}</p>
+										<p id='dollars'>$ {{424*(+item.wallet.balance /1e8) | number:2}}</p>
+									</div>
 									<h3>{{item.wallet.label}}</h3>
 									<h6>{{item.wallet.id}}</h6>
-								</div>
-								<div class='money' ng-click='focusWallet(item)'>
-									<p id='coin'>{{+item.wallet.balance / 1e8 | number:4}}</p>
-									<p id='dollars'>$ {{424*(+item.wallet.balance /1e8) | number:2}}</p>
 								</div>
 							</a>
 						</div>
 					</div>
 
 					<div class="col-md-8">
+						<div class='wallet-default'>
+							<a ng-if="meOnBL.defaultWalletID != focusedWallet.wallet.id"ng-click="selectDefaultWallet()" class='Make-this-wallet-default'>Make this wallet default</a>
+							<div ng-if="meOnBL.defaultWalletID == focusedWallet.wallet.id" class="default-wallet">This wallet is default</div>
+						</div>
 						<div class='wallets-tabs'>
 							<ul>
 								<li>
@@ -176,7 +175,7 @@
 							<div ng-if="walletTab == 2">
 								<div class='user-content'>
 									<h3>Grant user access to your wallet to enforce policy or enable multiple spenders.</h3>
-									<button ng-click="openAddUser();getListWallets()" ng-if='focusedWallet.wallet.users'>Add user</button>							
+									<button ng-click="openAddUser();getListWallets()" ng-if='focusedWallet.wallet.users'>Add user</button>
 								</div>
 								<div>
 									<table style="width: 100%" ng-if='focusedWallet.wallet.users'>
@@ -235,7 +234,7 @@
 							 	</ul>
 								<div ng-switch-when="1">
 								<div class='seting-content'>
-									<select class="modal_simple_form" ng-model='newAddressLabel.address'>
+									<select placeholder="Select..." class="modal_simple_form" ng-model='newAddressLabel.address'>
 										<option ng-repeat="addressForLabel in focusedWallet.wallet.listAddresses.addresses track by $index" 
 												value = "{{addressForLabel.address}}"
 										>
@@ -261,7 +260,7 @@
 										<a ng-click="sendOTP()" class='sent-sms'>Send SMS</a>
 									</form>
 									<form class="modal_simple_form seting-forms">
-										<select class="modal_simple_form" ng-model='duration.duration'>
+										<select placeholder="Select..." class="modal_simple_form" ng-model='duration.duration'>
 											<option value = "86400">Day</option>
 											<option value = "604800">Week</option>
 											<option value = "1209600">Two weeks</option>

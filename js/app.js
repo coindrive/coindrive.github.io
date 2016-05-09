@@ -31,6 +31,7 @@ config(['$locationProvider', '$routeProvider', '$compileProvider', 'StorageProvi
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob|filesystem|chrome-extension|app):|data:image\//);
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|file|tg|mailto|blob|filesystem|chrome-extension|app):|data:/);
 
+
   if (Config.Modes.test) {
     StorageProvider.setPrefix('t_');
   }
@@ -40,5 +41,4 @@ config(['$locationProvider', '$routeProvider', '$compileProvider', 'StorageProvi
   $routeProvider.when('/im', {templateUrl: templateUrl('im'), controller: 'AppIMController', reloadOnSearch: false});
   $routeProvider.when("/wallets",{templateUrl: templateUrl('wallets'),controller: 'WalletController'})
   $routeProvider.otherwise({redirectTo: '/'});
-
 }]);

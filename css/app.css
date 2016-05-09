@@ -188,25 +188,29 @@ input[type="number"]::-webkit-inner-spin-button {
 .btn-md {
   background: none;
   text-decoration: none !important;
-  border-radius: 2px;
   overflow: hidden;
+  color: #fff;
+  background-color: #4caf50;
+  display: inline-block;
+  padding: 5px 30px;
+  border-radius: 25px;
+  font-size: 15px;
   text-transform: uppercase;
-  font-size: 13px;
-  padding: 6px 10px;
-  font-weight: bold;
+  font-weight: 600;
 }
 .btn-md,
 .btn-md:focus,
 .btn-md:hover {
-  color:#4caf50;
+  background-color: #4caf50;;
 }
 .btn-md:hover {
-  background: #f2f6fa;
+  background: #7ab317;
+  color: #ffffff;
 }
 .btn-md-primary,
 .btn-md-primary:focus,
 .btn-md-primary:hover {
-  color: #4caf50;
+  color: #ffffff;
 }
 .btn-md-danger,
 .btn-md-danger:focus,
@@ -563,7 +567,7 @@ a.tg_checkbox:hover {
   transition: background-color ease-in-out 0.1s;
 }
 .tg_checkbox.tg_checkbox_on span.icon-checkbox-outer {
-  background-color: #bfd9ed;
+  background-color: #C8E6C9;
 }
 .tg_checkbox i.icon-checkbox-inner {
   display: inline-block;
@@ -641,7 +645,7 @@ i.icon-radio {
   transition: background-color ease-in-out 0.1s;
 }
 .tg_radio.tg_radio_on .icon-radio-outer {
-  border-color: #5c8db3;
+  border-color: #4CAF50;
 }
 .tg_radio.tg_radio_on i.icon-radio {
   background-color: #4caf50;
@@ -675,7 +679,7 @@ a.tg_radio_on:hover i.icon-radio {
   z-index: 2;
 }
 .tg_slider_track_fill {
-  background: #83afd2;
+  background: #7ab317;
   height: 4px;
 }
 .tg_slider_thumb {
@@ -1097,7 +1101,7 @@ i.icon-verified {
 }
 a.im_dialog:hover .im_dialog_message_text,
 a.im_dialog_selected .im_dialog_message_text {
-  color: #698192;
+  color: #878787;
 }
 .active a.im_dialog .im_dialog_chat_from_wrap,
 .active a.im_dialog .im_dialog_message_media,
@@ -2982,7 +2986,7 @@ a.contacts_modal_search_clear {
   border-radius: 0;
 }
 .contacts_modal_members_list a.contacts_modal_contact:hover {
-  background: #f2f6fa;
+  background: #C8E6C9;
 }
 .contacts_modal_members_list .active a.contacts_modal_contact,
 .contacts_modal_members_list .active a.contacts_modal_contact:hover {
@@ -3015,7 +3019,7 @@ a.contacts_modal_contact:hover .contacts_modal_contact_status,
 .contacts_modal_members_list .active a.contacts_modal_contact .contacts_modal_contact_status,
 a.contacts_modal_contact:hover .md_modal_list_peer_description,
 .contacts_modal_members_list .active a.contacts_modal_contact .md_modal_list_peer_description {
-  color: #91a6ba;
+  color: #737373;
 }
 h4.chat_modal_migrate_header {
   font-size: inherit;
