@@ -264,6 +264,9 @@
 	color: #242424;
 	display: block;
 }
+.seting-list ul li a  :hover { 
+text-decoration: none; 
+}
 .seting-content {
 	margin-left: 40px;
 }
@@ -320,4 +323,31 @@
 	color: #4caf50;
 	padding: 5px 30px;
 	display: inline-block;
+}
+.seting-content form input { 
+	border:1px solid #000; 
+} 
+.seting-content form input:focus { 
+	outline: none; 
+}
+.policy-tabs form .policy-form { 
+	border:1px solid #000; 
+}
+.policy-tabs form .policy-form{
+	outline: none; 
+}
+.active-wallet { 
+	background-color: #4caf50; 
+	color: #ffffff; 
+	border: 1px solid #4caf50; 
+}
+	
+.active-tab-settings { 
+	color: #4caf50 !important; 
+	border-bottom: 1px solid #4caf50; 
+	padding-bottom: 5px; 
+	text-decoration: none; 
+}
+.active-tab-settings:hover { 
+	text-decoration: none; 
 }

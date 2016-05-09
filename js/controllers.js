@@ -5093,7 +5093,7 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 		}
 		});
 	$rootScope.listShareWallets	
-	$scope.duration = {duration:4000}
+	$scope.duration = {duration:''}
 	$scope.smsCode = {otp:""}
 	$scope.freezeWallet = function(){
 		$rootScope.bitgo.wallets().get({ "id": $rootScope.focusedWallet.wallet.id }, function(err, wallet) {

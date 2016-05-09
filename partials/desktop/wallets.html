@@ -72,7 +72,9 @@
 					<div class="col-md-4">
 						<div class="wallet-wrapp">
 							<a class="wallet-wrapper" ng-repeat="item in listWallets track by $index">
-								<div class="all-wallets" ng-init="arrayWalletsBalance[$index] = {};arrayWalletsBalance[$index].id = item.wallet.id" ng-click='focusWallet(item)'>
+								<div <a ng-class="{'active-wallet': item.wallet.id == focusedWallet.wallet.id}" class="all-wallets" 
+										ng-init="arrayWalletsBalance[$index] = {};arrayWalletsBalance[$index].id = item.wallet.id" 
+										ng-click='focusWallet(item)'>
 									<div class='money-left' ng-click='focusWallet(item)'>
 										<p id='coin'>{{+item.wallet.balance / 1e8 | number:4}}</p>
 										<p id='dollars'>$ {{424*(+item.wallet.balance /1e8) | number:2}}</p>
@@ -92,16 +94,16 @@
 						<div class='wallets-tabs'>
 							<ul>
 								<li>
-									<a ng-click='walletTab = 1'>Transactions</a>
+									<a ng-class="{'active-tab-wallet': walletTab == 1}" ng-click='walletTab = 1'>Transactions</a>
 								</li>
 								<li>
-									<a ng-click='walletTab = 2'>Users</a>
+									<a ng-class="{'active-tab-wallet': walletTab == 2}" ng-click='walletTab = 2'>Users</a>
 								</li>
 								<li>
-									<a ng-click='walletTab = 3'>Policy</a>
+									<a ng-class="{'active-tab-wallet': walletTab == 3}" ng-click='walletTab = 3'>Policy</a>
 								</li>
 								<li>
-									<a ng-click='walletTab = 4'>Settings</a>
+									<a ng-class="{'active-tab-wallet': walletTab == 4}" ng-click='walletTab = 4'>Settings</a>
 								</li>
 								</ul>
 						</div>
@@ -223,21 +225,22 @@
 							<div ng-if="walletTab == 3">
 								<h3>Policy</h3>
 								<ul ng-model = 'policyTab', ng-init='policyTab = 1'>
-								<li><a ng-click='policyTab = 1'>Daily Limits for wallet</a></li>
+								<li><a ng-class="{'active-tab-policy': policyTab == 1}" ng-click='policyTab = 1'>Daily Limits for wallet</a></li>
 								<!-- <li><a ng-click='policyTab = 2'>Daily Limits per user</a></li> -->
-								<li><a ng-click='policyTab = 3'>Transaction Limits</a></li>
+								<li><a ng-class="{'active-tab-policy': policyTab == 3}" ng-click='policyTab = 3'>Transaction Limits</a></li>
 								</ul>
 								<div>
-									<div ng-if="policyTab === 1">
+									<div ng-if="policyTab === 1" class='policy-tabs'>
 										<p>Manage your daily spending limit for this wallet.</p>
 										<form name='walletPolicyPerDay'ng-submit="submitWalletPolicy()">
-											<input ng-model='walletPolicy.amountBitcoins' type="number" step="0.0001" required>
+											<input ng-model='walletPolicy.amountBitcoins' type="number" class='policy-form'step="0.0001" required>
 											<button class="btn btn-md im_submit" type='submit' ng-disabled="walletPolicyPerDay.$invalid" style="float:none;margin-bottom:10px;">Set policy</button>
 										</form>
 										<a class='sent-button' ng-click='removePolicyPerDay()'>Remove policy per day</a>
+										
 										<a class='sent-button' ng-click='removeAllPolicyPerWallet()'>Remove all policy per wallet</a>
 									</div>
-									<div ng-if="policyTab === 2">
+									<div ng-if="policyTab === 2" class='policy-tabs'>
 										<p>Manage your per-user spending limit for this wallet.</p>
 										<form name='policyPerUser'  ng-model='policyPerUser' ng-submit="showForm()" >
 											<select class="modal_simple_form" ng-model='policyPerUser.bitCoinID' name='policyPerUser.bitCoinID' required>
@@ -248,7 +251,7 @@
 													{{policyUser.email}}
 												</option>											
 											</select>
-											<input type="number" step="0.0001" required ng-model='amountBitCoin' name='amountBitCoin'>
+											<input type="number" step="0.0001" required ng-model='amountBitCoin' name='amountBitCoin' class='policy-form'>
 											<button type='submit'>Set policy</button>
 										</form>
 									</div>
@@ -266,13 +269,14 @@
 							<div ng-if="walletTab == 4">
 							<div ng-switch="settingsTab" class='seting-list'>
 							 	<ul ng-init = 'settingsTab = 1'>
-							 		<li><a ng-click="settingsTab = 1">General</a></li>
+							 		<li><a ng-class="{'active-tab-settings': settingsTab == 1}" ng-click="settingsTab = 1">General</a></li>
 							 		<!--<li><a ng-click="settingsTab = 2">Password</a></li> -->
-							 		<li><a ng-click="settingsTab = 3">Freeze wallet</a></li>
+							 		<li><a ng-class="{'active-tab-settings': settingsTab == 3}" ng-click="settingsTab = 3">Freeze wallet</a></li>
 							 	</ul>
 								<div ng-switch-when="1">
 								<div class='seting-content'>
 									<select placeholder="Select..." class="modal_simple_form" ng-model='newAddressLabel.address'>
+										<option value="">- Please Choose -</option>
 										<option ng-repeat="addressForLabel in focusedWallet.wallet.listAddresses.addresses track by $index" 
 												value = "{{addressForLabel.address}}"
 										>
@@ -299,6 +303,7 @@
 									</form>
 									<form class="modal_simple_form seting-forms">
 										<select placeholder="Select..." class="modal_simple_form" ng-model='duration.duration'>
+											<option value="">Please Choose</option>
 											<option value = "86400">Day</option>
 											<option value = "604800">Week</option>
 											<option value = "1209600">Two weeks</option>

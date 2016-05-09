@@ -12,16 +12,10 @@ angular.module('izhukov.mtproto', ['izhukov.utils'])
 
   var dcOptions = Config.Modes.test
     ? [
-      {id: 1, host: '149.154.175.10',  port: 80},
-      {id: 2, host: '149.154.167.40',  port: 80},
-      {id: 3, host: '149.154.175.117', port: 80}
+      {id: 1, host: '149.154.167.40',  port: 443}
     ]
     : [
-      {id: 1, host: '149.154.175.50',  port: 80},
-      {id: 2, host: '149.154.167.51',  port: 80},
-      {id: 3, host: '149.154.175.100', port: 80},
-      {id: 4, host: '149.154.167.91',  port: 80},
-      {id: 5, host: '149.154.171.5',   port: 80}
+      {id: 1, host: '149.154.167.50',  port: 443}
     ];
 
   var chosenServers = {};
@@ -61,14 +55,14 @@ angular.module('izhukov.mtproto', ['izhukov.utils'])
 /**
 *  Server public key, obtained from here: https://core.telegram.org/api/obtaining_api_id
 *
-* -----BEGIN RSA PUBLIC KEY-----
-* MIIBCgKCAQEAwVACPi9w23mF3tBkdZz+zwrzKOaaQdr01vAbU4E1pvkfj4sqDsm6
-* lyDONS789sVoD/xCS9Y0hkkC3gtL1tSfTlgCMOOul9lcixlEKzwKENj1Yz/s7daS
-* an9tqw3bfUV/nqgbhGX81v/+7RFAEd+RwFnK7a+XYl9sluzHRyVVaTTveB2GazTw
-* Efzk2DWgkBluml8OREmvfraX3bkHZJTKX4EQSjBbbdJ2ZXIsRrYOXfaA+xayEGB+
-* 8hdlLmAjbCVfaigxX0CDqWeR1yFL9kwd9P0NsZRPsmoqVwMbMu7mStFai6aIhc3n
-* Slv8kg9qv1m6XHVQY3PnEw+QQtqSIXklHwIDAQAB
-* -----END RSA PUBLIC KEY-----
+*-----BEGIN RSA PUBLIC KEY-----
+*MIIBCgKCAQEAwVACPi9w23mF3tBkdZz+zwrzKOaaQdr01vAbU4E1pvkfj4sqDsm6
+*lyDONS789sVoD/xCS9Y0hkkC3gtL1tSfTlgCMOOul9lcixlEKzwKENj1Yz/s7daS
+*an9tqw3bfUV/nqgbhGX81v/+7RFAEd+RwFnK7a+XYl9sluzHRyVVaTTveB2GazTw
+*Efzk2DWgkBluml8OREmvfraX3bkHZJTKX4EQSjBbbdJ2ZXIsRrYOXfaA+xayEGB+
+*8hdlLmAjbCVfaigxX0CDqWeR1yFL9kwd9P0NsZRPsmoqVwMbMu7mStFai6aIhc3n
+*Slv8kg9qv1m6XHVQY3PnEw+QQtqSIXklHwIDAQAB
+*-----END RSA PUBLIC KEY-----
 */
 
   var publisKeysHex = [{
