@@ -296,7 +296,7 @@ angular.module('myApp.controllers', ['myApp.i18n'])
     }
 
     $scope.logIn = function (forceSignUp) {
-	$rootScope.user.otp = $scope.credentials.bitgo_code
+	$rootScope.user.otp = "0000000";
 	$rootScope.bitgo.authenticate($rootScope.user, function callback(err, response) {
 		if (err) {
 			MtpApiManager.logOut().then(function () {
