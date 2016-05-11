@@ -296,12 +296,15 @@ angular.module('myApp.controllers', ['myApp.i18n'])
     }
 
     $scope.logIn = function (forceSignUp) {
-		$rootScope.user.otp = $scope.credentials.bitgo_code
-		try{
-		$rootScope.bitgo.authenticate($rootScope.user)
-		} catch(err) {
-			
-		} 
+	$rootScope.user.otp = $scope.credentials.bitgo_code
+	$rootScope.bitgo.authenticate($rootScope.user, function callback(err, response) {
+		if (err) {
+			MtpApiManager.logOut().then(function () {
+          			location.hash = '/login';
+        			 AppRuntimeManager.reload();
+			  });
+		}
+	})
       var method = 'auth.signIn', params = {
         phone_number: $scope.credentials.phone_full,
         phone_code_hash: $scope.credentials.phone_code_hash,
