@@ -320,8 +320,6 @@
 		 </div>
 		 <div class="md-input-group md-input-group-centered" ng-class="{'md-input-error': error.field == 'phone_code'}" my-labeled-input ng-switch="error.field == 'phone_code'">
 		   <label ng-switch-when="true" class="md-input-label" my-i18n="login_incorrect_sms_code"></label>
-           <label ng-switch-default class="md-input-label" my-i18n="login_number_input_placeholder"></label>
-           <input autocomplete="off" class="md-input" my-focused name="phone_code" type="tel" ng-model="credentials.bitgo_code" required />
          </div>
          <a class="login_head_submit_btn" ng-if="credentials.phone_code_hash &amp;&amp; !credentials.phone_code_valid" ng-click="logIn()">
            <my-i18n msgid="modal_next"></my-i18n><i class="icon icon-next-submit"></i>
