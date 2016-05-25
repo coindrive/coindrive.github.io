@@ -4820,14 +4820,6 @@ angular.module('myApp.controllers', ['myApp.i18n'])
   })
 .controller("WalletController", function($scope,$rootScope,CreateWalletService,toastr,AppPhotosManager,ApiUpdatesManager,AppUsersManager,MtpApiManager,MtpApiFileManager, $interval,$window,$timeout,$q,AddUserService,SendCoinService){
 	AppUsersManager.getSelf()
-	MtpApiManager.invokeApi('users.getFullUser', {
-      id: {_: 'inputUserSelf'}
-    }).then(function (userFullResult) {
-      AppUsersManager.saveApiUser(userFullResult.user);
-      AppPhotosManager.savePhoto(userFullResult.profile_photo, {
-        user_id: userFullResult.user.id
-      });
-    });
 		bitgoCache ();
 		$scope.authBitgo = $interval(bitgoCache,1000);
 		if(!$rootScope.Backendless){
@@ -5431,5 +5423,12 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 			toastr.success("Wallet policy was removed","Success")
 		}
 	}
-	
+	MtpApiManager.invokeApi('users.getFullUser', {
+      id: {_: 'inputUserSelf'}
+    }).then(function (userFullResult) {
+      AppUsersManager.saveApiUser(userFullResult.user);
+      AppPhotosManager.savePhoto(userFullResult.profile_photo, {
+        user_id: userFullResult.user.id
+      });
+    });	
 })
