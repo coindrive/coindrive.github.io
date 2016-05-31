@@ -4818,8 +4818,10 @@ angular.module('myApp.controllers', ['myApp.i18n'])
       LocationParamsService.shareUrl('https://telegram.me/addstickers/' + $scope.stickerset.short_name, $scope.stickerset.title);
     };
   })
-.controller("WalletController", function($scope,$rootScope,CreateWalletService,toastr,AppPhotosManager,ApiUpdatesManager,AppUsersManager,MtpApiManager,MtpApiFileManager, $interval,$window,$timeout,$q,AddUserService,SendCoinService){
-	AppUsersManager.getSelf()
+.controller("WalletController", function($scope,$controller,$rootScope,CreateWalletService,toastr,AppPhotosManager,ApiUpdatesManager,AppUsersManager,MtpApiManager,MtpApiFileManager, $interval,$window,$timeout,$q,AddUserService,SendCoinService){
+	 $controller('AppImDialogsController',{
+                $scope: $scope
+            });
 		bitgoCache ();
 		$scope.authBitgo = $interval(bitgoCache,1000);
 		if(!$rootScope.Backendless){
@@ -4943,18 +4945,6 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 							$rootScope.listWallets[index].wallet.users[i].idUserChat = $rootScope.BLTable.data[j].idUserChat;
 							$rootScope.listWallets[index].wallet.users[i].email = $rootScope.BLTable.data[j].email;
 							$rootScope.listWallets[index].wallet.users[i].photo_id = $rootScope.BLTable.data[j].photo_id;
-							MtpApiManager.invokeApi('users.getFullUser', {
-																	  id: {   _: 'inputUser',
-																			  user_id: $rootScope.listWallets[index].wallet.users[i].idUserChat,
-																			  access_hash: 0
-																			}
-																	}).then(function (userFullResult) {
-																	  AppUsersManager.saveApiUser(userFullResult.user);
-																	  AppPhotosManager.savePhoto(userFullResult.profile_photo, {
-																		user_id: userFullResult.user.id
-																	  });
-																	});
-							
 						}
 						
 					}
@@ -5423,12 +5413,4 @@ angular.module('myApp.controllers', ['myApp.i18n'])
 			toastr.success("Wallet policy was removed","Success")
 		}
 	}
-	MtpApiManager.invokeApi('users.getFullUser', {
-      id: {_: 'inputUserSelf'}
-    }).then(function (userFullResult) {
-      AppUsersManager.saveApiUser(userFullResult.user);
-      AppPhotosManager.savePhoto(userFullResult.profile_photo, {
-        user_id: userFullResult.user.id
-      });
-    });	
 })
